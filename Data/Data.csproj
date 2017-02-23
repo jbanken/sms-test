@@ -51,9 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MessageLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ThirdPartyService.cs" />
     <Compile Include="SMSDataModel.cs" />
   </ItemGroup>
   <ItemGroup>

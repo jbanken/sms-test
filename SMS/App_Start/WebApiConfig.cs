@@ -17,6 +17,8 @@ namespace SMS
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
+            //config.MessageHandlers.Add(new API.Handlers.LoggingHandler());
+
             // Web API routes
             config.MapHttpAttributeRoutes();
 

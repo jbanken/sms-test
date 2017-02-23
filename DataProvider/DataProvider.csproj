@@ -54,7 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\InjectionConfig.cs" />
+    <Compile Include="Interfaces\ILogDataProvider.cs" />
     <Compile Include="Interfaces\ISMSDataProvider.cs" />
+    <Compile Include="LogDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SMSDataProvider.cs" />
   </ItemGroup>

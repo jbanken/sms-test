@@ -10,6 +10,7 @@ namespace Data
 
         public virtual DbSet<Entity.MessageLog> MessageLogs { get; set; }
         public virtual DbSet<Entity.ThirdPartyService> ThirdPartyServices { get; set; }
+        public virtual DbSet<Entity.APILog> APILogs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
