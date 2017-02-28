@@ -1,4 +1,6 @@
 ﻿
+using Logger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 using Twilio;
@@ -10,6 +12,14 @@ namespace SMSProvider
 {
     public class TwilioSMSProvider : Interfaces.ITwilioSMSProvider
     {
+
+        public ILogService LogService { get; set; }
+
+        public TwilioSMSProvider(ILogService logService)
+        {
+            LogService = logService;
+        }
+
         public async Task<Models.SendResponse> Send(Models.SendRequest request)
         {
             var result = new Models.SendResponse();
@@ -19,14 +29,43 @@ namespace SMSProvider
             var from = System.Configuration.ConfigurationManager.AppSettings["TwilioTestFrom"];
 
             TwilioClient.Init(accountSid, authToken);
+            
+            var client = TwilioClient.GetRestClient();
+            var log = new Entity.APILog();
+            log.RequestContentBody = "To="+request.To+ "&From=" + from + "&Body=" + request.Message;
+            log.RequestContentType = "application/json";
+            log.RequestHeaders = "accountSid="+accountSid+ "&authToken="+ authToken;
+            log.RequestIpAddress = "";
+            log.RequestMethod = "POST";
+            log.RequestTimeStamp = DateTime.UtcNow;
+            log.RequestUri = "https://api.twilio.com/2010-04-01/Accounts/"+ accountSid + "/Messages.json";
+            log = await LogService.LogRequest(log);
 
-            //TODO log pre twilio call
-            var message = await MessageResource.CreateAsync(
-                to:new PhoneNumber(request.To),
-                from: new PhoneNumber(from),//TODO using test FROM for now
-                body: request.Message
-            );
-            //TODO log post twilio call
+            MessageResource message;
+            try { 
+                message = await MessageResource.CreateAsync(
+                    to:new PhoneNumber(request.To),
+                    from: new PhoneNumber(from),//TODO using test FROM for now
+                    body: request.Message
+                );
+            }catch(Exception ex){
+                log.ResponseContentBody = ex.Message;
+                log.ResponseContentType = "error";
+                log.ResponseHeaders = null;
+                log.ResponseStatusCode = 500;
+                log.ResponseTimeStamp = DateTime.UtcNow;
+                log = await LogService.LogResponse(log);
+
+                return result;
+            }
+
+            log.ResponseContentBody = JsonConvert.SerializeObject(message);
+            log.ResponseContentType = "application/json";
+            log.ResponseHeaders = null;
+            log.ResponseStatusCode = 200;
+            log.ResponseTimeStamp = DateTime.UtcNow;
+            log = await LogService.LogResponse(log);
+
             return result;
         }
     }

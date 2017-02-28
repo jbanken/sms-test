@@ -277,6 +277,10 @@
       <Project>{5c2313a7-b947-4145-b73d-64a9ab9c87b8}</Project>
       <Name>Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LogService\Logger.csproj">
+      <Project>{731ee4a6-012f-4b02-bda4-0da5b2aa8040}</Project>
+      <Name>Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{40976638-98d9-4369-a478-c2dc5839a156}</Project>
       <Name>Service</Name>

@@ -8,6 +8,7 @@ using System.Web;
 using Service.Interfaces;
 using System.ServiceModel.Channels;
 using Microsoft.Owin;
+using Logger.Interfaces;
 
 namespace API.Handlers
 {
@@ -41,9 +42,13 @@ namespace API.Handlers
             log.RequestMethod = request.Method.ToString();
             log.RequestTimeStamp = DateTime.UtcNow;
             log.RequestUri = request.RequestUri.ToString();
-
             log = await LogService.LogRequest(log);
-            
+
+            //set the APILogGroupKey in the owinContext for the log record GroupKey value for 3rd party calls so we know what external calls were made in this request
+            var owinContext = request.GetOwinContext();
+            owinContext.Set<Guid>("APILogGroupKey", (Guid)log.GroupKey);
+            request.SetOwinContext(owinContext);
+
             //Response comes back
             var response = await base.SendAsync(request, cancellationToken);
 

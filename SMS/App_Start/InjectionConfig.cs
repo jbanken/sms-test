@@ -13,9 +13,12 @@ namespace API.App_Start
         public static void Configure()
         {
             var container = new Container();
+            container.Options.AllowOverridingRegistrations = true;
             container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
 
+            Logger.Config.InjectionConfig.ConfigureInjections(container);
             Service.Config.InjectionConfig.ConfigureInjections(container);
+            
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
             container.Register<Handlers.LoggingHandler>(Lifestyle.Singleton);

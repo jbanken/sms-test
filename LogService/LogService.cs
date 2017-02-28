@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Entity;
 using DataProvider.Interfaces;
 
-namespace Service
+namespace Logger
 {
     public class LogService : Interfaces.ILogService
     {
