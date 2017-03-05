@@ -36,7 +36,7 @@ namespace API.Handlers
             var log = new Entity.APILog();
             log.GroupKey = Guid.NewGuid();
             log.RequestContentBody = requestBody;
-            log.RequestContentType = request.Content.Headers.ContentType.ToString();
+            log.RequestContentType = request.Content.Headers.ContentType!= null ? request.Content.Headers.ContentType.ToString() : null;
             log.RequestHeaders = headersToLog;
             log.RequestIpAddress = GetClientIp(request);
             log.RequestMethod = request.Method.ToString();

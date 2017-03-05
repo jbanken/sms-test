@@ -27,6 +27,7 @@ namespace SMSProvider
             var accountSid = System.Configuration.ConfigurationManager.AppSettings["TwilioSID"];
             var authToken = System.Configuration.ConfigurationManager.AppSettings["TwilioAuthToken"];
             var from = System.Configuration.ConfigurationManager.AppSettings["TwilioTestFrom"];
+            var twilioEventURL = System.Configuration.ConfigurationManager.AppSettings["TwilioEventURL"];
 
             TwilioClient.Init(accountSid, authToken);
             
@@ -46,7 +47,8 @@ namespace SMSProvider
                 message = await MessageResource.CreateAsync(
                     to:new PhoneNumber(request.To),
                     from: new PhoneNumber(from),//TODO using test FROM for now
-                    body: request.Message
+                    body: request.Message,
+                    statusCallback: new Uri(twilioEventURL)
                 );
             }catch(Exception ex){
                 log.ResponseContentBody = ex.Message;
