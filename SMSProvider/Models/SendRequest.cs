@@ -10,5 +10,11 @@ namespace SMSProvider.Models
         public string Message { get; set; }
 
         public string ReferenceCode { get; set; }
+
+        public string AccountSid { get; set; }
+
+        public string AuthToken { get; set; }
+
+        public string StatusCallbackURL { get; set; }
     }
 }

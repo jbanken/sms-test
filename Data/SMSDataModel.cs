@@ -12,6 +12,10 @@ namespace Data
         public virtual DbSet<Entity.ThirdPartyService> ThirdPartyServices { get; set; }
         public virtual DbSet<Entity.APILog> APILogs { get; set; }
 
+        public virtual DbSet<Entity.TwilioIncomingMessageCallback> TwilioIncomingMessageCallbacks { get; set; }
+        public virtual DbSet<Entity.TwilioMessage> TwilioMessages { get; set; }
+        public virtual DbSet<Entity.TwilioStatusCallback> TwilioStatusCallbacks { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
         }

@@ -45,6 +45,9 @@
     <Compile Include="MessageLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThirdPartyService.cs" />
+    <Compile Include="TwilioIncomingMessageCallback.cs" />
+    <Compile Include="TwilioMessage.cs" />
+    <Compile Include="TwilioStatusCallback.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

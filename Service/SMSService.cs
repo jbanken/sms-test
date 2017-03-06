@@ -9,11 +9,12 @@ namespace Service
     public class SMSService : Interfaces.ISMSService
     {
         public ISMSDataProvider SMSDataProvider { get; set; }
-        public ITwilioSMSProvider TwilioSMSProvider { get; set; }
-        public SMSService(ISMSDataProvider smsDataProvider, ITwilioSMSProvider twilioSMSProvider)
+        public ITwilioService TwilioService { get; set; }
+
+        public SMSService(ISMSDataProvider smsDataProvider, ITwilioService twilioService)
         {
             SMSDataProvider = smsDataProvider;
-            TwilioSMSProvider = twilioSMSProvider;
+            TwilioService = twilioService;
         }
 
         public async Task<ThirdPartyService> FindThirdPartyService(string code)
@@ -21,14 +22,20 @@ namespace Service
             return await SMSDataProvider.FindThirdPartyService(code);
         }
 
+        public async Task<MessageLog> SaveLog(MessageLog log)
+        {
+            return await SMSDataProvider.SaveLog(log);
+        }
+
         public async Task<MessageLog> Send(Models.SendRequest request)
         {
-            var log = new MessageLog();
-            log.CreateDate = DateTime.UtcNow;
-            log.ReferenceCode = request.ReferenceCode;
+            //log message
+            var log = new Entity.MessageLog();
             log.To = request.To;
             log.From = request.From;
-            log = await SMSDataProvider.Log(log);
+            log.ReferenceCode = request.ReferenceCode;
+            log.ThirdPartyServiceID = 1;
+            log = await SaveLog(log);
 
             //TODO save the log body(s) any message over a 160 chars will be split into multiple messages
 
@@ -48,7 +55,7 @@ namespace Service
             sendRequest.ReferenceCode = request.ReferenceCode;
 
             //TODO allow for SMSProviders to be swapped out
-            var sendResponse = await TwilioSMSProvider.Send(sendRequest);
+            var sendResponse = await TwilioService.Send(request);
         }
     }
 }

@@ -56,9 +56,11 @@
     <Compile Include="Config\InjectionConfig.cs" />
     <Compile Include="Interfaces\ILogDataProvider.cs" />
     <Compile Include="Interfaces\ISMSDataProvider.cs" />
+    <Compile Include="Interfaces\ITwilioDataProvider.cs" />
     <Compile Include="LogDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SMSDataProvider.cs" />
+    <Compile Include="TwilioDataProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj">

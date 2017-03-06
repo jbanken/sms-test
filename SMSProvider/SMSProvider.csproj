@@ -81,10 +81,6 @@
       <Project>{5c2313a7-b947-4145-b73d-64a9ab9c87b8}</Project>
       <Name>Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LogService\Logger.csproj">
-      <Project>{731ee4a6-012f-4b02-bda4-0da5b2aa8040}</Project>
-      <Name>Logger</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

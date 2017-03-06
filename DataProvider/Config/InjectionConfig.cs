@@ -7,6 +7,7 @@ namespace DataProvider.Config
         {
             container.Register<Interfaces.ISMSDataProvider, SMSDataProvider>(Lifestyle.Singleton);
             container.Register<Interfaces.ILogDataProvider, LogDataProvider>(Lifestyle.Singleton);
+            container.Register<Interfaces.ITwilioDataProvider, TwilioDataProvider>(Lifestyle.Singleton);
         }
     }
 }

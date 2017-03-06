@@ -1,23 +1,33 @@
 ﻿
 using System.Threading.Tasks;
-using Entity;
 using System.Data.Entity;
+using System;
+
 namespace DataProvider
 {
     public class SMSDataProvider : Interfaces.ISMSDataProvider
     {
-        public async Task<ThirdPartyService> FindThirdPartyService(string code)
+        public async Task<Entity.ThirdPartyService> FindThirdPartyService(string code)
         {
             using (var db = new Data.SMSDataModel())
             {
                 return await db.ThirdPartyServices.FirstOrDefaultAsync(tps => tps.Code.Equals(code.ToLower()));
             }
         }
-        public async Task<MessageLog> Log(MessageLog log)
+        public async Task<Entity.MessageLog> SaveLog(Entity.MessageLog log)
         {
-            using(var db = new Data.SMSDataModel())
+            using (var db = new Data.SMSDataModel())
             {
-                db.MessageLogs.Add(log);
+                if (log.Id == 0)
+                {
+                    log.CreateDate = DateTime.UtcNow;
+                    db.MessageLogs.Add(log);
+                }
+                else
+                {
+                    db.MessageLogs.Attach(log);
+                }
+
                 await db.SaveChangesAsync();
                 return log;
             }

@@ -8,7 +8,7 @@ namespace DataProvider.Interfaces
 {
     public interface ISMSDataProvider
     {
-        Task<Entity.MessageLog> Log(Entity.MessageLog log);
+        Task<Entity.MessageLog> SaveLog(Entity.MessageLog log);
         Task<Entity.ThirdPartyService> FindThirdPartyService(string code);
     }
 }
