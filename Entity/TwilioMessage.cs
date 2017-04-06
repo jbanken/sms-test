@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity
@@ -6,7 +7,7 @@ namespace Entity
     [Table("Twilio.Message")]
     public class TwilioMessage
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [StringLength(100)]
         public string AccountSid { get; set; }
         [StringLength(20)]

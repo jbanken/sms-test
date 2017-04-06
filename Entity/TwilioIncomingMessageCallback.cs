@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,7 +8,7 @@ namespace Entity
     [Table("Twilio.IncomingMessageCallback")]
     public class TwilioIncomingMessageCallback
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [StringLength(100)]
         public string AccountSid    {get;set;}
         [StringLength(20)]

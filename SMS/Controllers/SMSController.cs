@@ -6,6 +6,7 @@ using System.Web.Http;
 
 namespace API.Controllers
 {
+    [Authorize]
     [RoutePrefix("sms")]
     public class SMSController : ApiController
     {

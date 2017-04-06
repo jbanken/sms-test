@@ -7,7 +7,7 @@ namespace Entity
     [Table("dbo.APILog")]
     public partial class APILog
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         
         public Guid? GroupKey { get; set; }
 

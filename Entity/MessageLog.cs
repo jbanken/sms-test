@@ -6,10 +6,10 @@ namespace Entity
 {
    
 
-    [Table("Message.Log")]
+    [Table("sms.Message")]
     public partial class MessageLog
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [StringLength(1000)]
@@ -19,7 +19,7 @@ namespace Entity
         [StringLength(1000)]
         public string From { get; set; }
 
-        public int ThirdPartyServiceID { get; set; }
+        public Guid ThirdPartyServiceID { get; set; }
 
         [StringLength(200)]
         public string ThirdPartyReferenceCode { get; set; }

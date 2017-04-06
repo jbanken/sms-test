@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataProvider
@@ -13,6 +11,7 @@ namespace DataProvider
         {
             using (var db = new Data.SMSDataModel())
             {
+                log.Id = Guid.NewGuid();
                 db.APILogs.Add(log);
                 await db.SaveChangesAsync();
                 return log;

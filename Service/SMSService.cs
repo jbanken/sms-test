@@ -34,7 +34,7 @@ namespace Service
             log.To = request.To;
             log.From = request.From;
             log.ReferenceCode = request.ReferenceCode;
-            log.ThirdPartyServiceID = 1;
+            log.ThirdPartyServiceID = Guid.Parse("CE38FF59-A125-406B-81DB-FBF25BB06331");//TODO fix
             log = await SaveLog(log);
 
             //TODO save the log body(s) any message over a 160 chars will be split into multiple messages

@@ -4,7 +4,7 @@ namespace Data
     public partial class SMSDataModel : DbContext
     {
         public SMSDataModel()
-            : base("name=SMSDataModel")
+            : base("name=TechboardDataModel")
         {
         }
 

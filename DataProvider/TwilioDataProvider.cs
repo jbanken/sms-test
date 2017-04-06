@@ -13,8 +13,9 @@ namespace DataProvider
         {
             using (var db = new Data.SMSDataModel())
             {
-                if (record.Id == 0)
+                if (record.Id == Guid.Empty)
                 {
+                    record.Id = Guid.NewGuid();
                     db.TwilioIncomingMessageCallbacks.Add(record);
                 }
                 else
@@ -31,8 +32,9 @@ namespace DataProvider
         {
             using (var db = new Data.SMSDataModel())
             {
-                if (message.Id == 0)
+                if (message.Id == Guid.Empty)
                 {
+                    message.Id = Guid.NewGuid();
                     db.TwilioMessages.Add(message);
                 }
                 else
@@ -49,8 +51,9 @@ namespace DataProvider
         {
             using (var db = new Data.SMSDataModel())
             {
-                if (record.Id == 0)
+                if (record.Id == Guid.Empty)
                 {
+                    record.Id = Guid.NewGuid();
                     db.TwilioStatusCallbacks.Add(record);
                 }
                 else

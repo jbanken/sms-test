@@ -18,8 +18,9 @@ namespace DataProvider
         {
             using (var db = new Data.SMSDataModel())
             {
-                if (log.Id == 0)
+                if (log.Id == Guid.Empty)
                 {
+                    log.Id = Guid.NewGuid();
                     log.CreateDate = DateTime.UtcNow;
                     db.MessageLogs.Add(log);
                 }

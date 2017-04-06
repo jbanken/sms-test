@@ -11,7 +11,7 @@ namespace Entity
     [Table("Twilio.StatusCallback")]
     public class TwilioStatusCallback
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [StringLength(100)]
         public string SmsSid  { get; set; }
         [StringLength(100)]

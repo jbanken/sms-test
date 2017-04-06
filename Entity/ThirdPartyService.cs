@@ -6,7 +6,7 @@ namespace Entity
     [Table("ThirdParty.Service")]
     public partial class ThirdPartyService
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [StringLength(200)]
