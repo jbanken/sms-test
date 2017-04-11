@@ -66,8 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\InjectionConfig.cs" />
-    <Compile Include="Handlers\APIKeyHandler.cs" />
-    <Compile Include="Handlers\AuthHandler.cs" />
     <Compile Include="Principals\APIPrincipal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

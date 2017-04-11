@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Security.Handlers
+namespace API.Handlers
 {
     public class APIKeyHandler : DelegatingHandler
     {
