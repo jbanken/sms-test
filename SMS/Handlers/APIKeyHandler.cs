@@ -31,7 +31,7 @@ namespace API.Handlers
             }
 
             //If the key is not valid, return an http status code.
-            if (!isValidAPIKey)
+            if (!isValidAPIKey && !request.RequestUri.LocalPath.Contains("swagger"))
                 return request.CreateResponse(HttpStatusCode.Forbidden, "Invalid API Key");
 
             //Allow the request to process further down the pipeline
