@@ -10,11 +10,11 @@ namespace API.Controllers
     [RoutePrefix("sms")]
     public class SMSController : ApiController
     {
-        public ISMSService SMSService { get; set; }
+        private ISMSService _SMSService;
 
         public SMSController(ISMSService smsService)
         {
-            SMSService = smsService;
+            _SMSService = smsService;
         }
 
         [HttpPost]
@@ -22,9 +22,24 @@ namespace API.Controllers
         public async Task<IHttpActionResult> Send([FromBody]SendRequest request)
         {
             try { 
-            var result = await SMSService.Send(request);
-            return Ok<Entity.MessageLog>(result);
+            var result = await _SMSService.Send(request);
+            return Created<Entity.MessageLog>(@"/{result.Id}",result);
             }catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("{id:guid}")]
+        public async Task<IHttpActionResult> Get([FromUri] Guid id)
+        {
+            try
+            {
+                var result = await _SMSService.GetById(id);
+                return Ok<Entity.MessageLog>(result);
+            }
+            catch (Exception ex)
             {
                 return InternalServerError(ex);
             }

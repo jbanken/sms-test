@@ -1,5 +1,6 @@
 ﻿
 using Entity;
+using System;
 using System.Threading.Tasks;
 
 namespace Service.Interfaces
@@ -9,5 +10,6 @@ namespace Service.Interfaces
         Task<MessageLog> SaveLog(MessageLog log);
         Task<Entity.MessageLog> Send(Models.SendRequest request);
         Task<Entity.ThirdPartyService> FindThirdPartyService(string code);
+        Task<Entity.MessageLog> GetById(Guid id);
     }
 }

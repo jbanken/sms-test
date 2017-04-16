@@ -8,23 +8,23 @@ namespace Service
 {
     public class SMSService : Interfaces.ISMSService
     {
-        public ISMSDataProvider SMSDataProvider { get; set; }
-        public ITwilioService TwilioService { get; set; }
+        private ISMSDataProvider _SMSDataProvider;
+        private ITwilioService _TwilioService;
 
         public SMSService(ISMSDataProvider smsDataProvider, ITwilioService twilioService)
         {
-            SMSDataProvider = smsDataProvider;
-            TwilioService = twilioService;
+            _SMSDataProvider = smsDataProvider;
+            _TwilioService = twilioService;
         }
 
         public async Task<ThirdPartyService> FindThirdPartyService(string code)
         {
-            return await SMSDataProvider.FindThirdPartyService(code);
+            return await _SMSDataProvider.FindThirdPartyService(code);
         }
 
         public async Task<MessageLog> SaveLog(MessageLog log)
         {
-            return await SMSDataProvider.SaveLog(log);
+            return await _SMSDataProvider.SaveLog(log);
         }
 
         public async Task<MessageLog> Send(Models.SendRequest request)
@@ -55,7 +55,12 @@ namespace Service
             sendRequest.ReferenceCode = request.ReferenceCode;
 
             //TODO allow for SMSProviders to be swapped out
-            var sendResponse = await TwilioService.Send(request);
+            var sendResponse = await _TwilioService.Send(request);
+        }
+
+        public async Task<Entity.MessageLog> GetById(Guid id)
+        {
+            return await _SMSDataProvider.GetById(id);
         }
     }
 }
