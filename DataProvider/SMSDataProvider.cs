@@ -36,6 +36,7 @@ namespace DataProvider
                 }
                 else
                 {
+                    db.Entry(log).State = EntityState.Modified;
                     db.MessageLogs.Attach(log);
                 }
 

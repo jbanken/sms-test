@@ -12,5 +12,6 @@ namespace Service.Models
         public string From { get; set; }
         public string Message { get; set; }
         public string ReferenceCode { get; set; }
+        public Guid? MessageId { get; set; }
     }
 }

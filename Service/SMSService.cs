@@ -36,7 +36,7 @@ namespace Service
             log.ReferenceCode = request.ReferenceCode;
             log.ThirdPartyServiceID = Guid.Parse("CE38FF59-A125-406B-81DB-FBF25BB06331");//TODO fix
             log = await SaveLog(log);
-
+            request.MessageId = log.Id;
             //TODO save the log body(s) any message over a 160 chars will be split into multiple messages
 
             //TODO actually have a queueing mechnamism 
@@ -56,6 +56,10 @@ namespace Service
 
             //TODO allow for SMSProviders to be swapped out
             var sendResponse = await _TwilioService.Send(request);
+
+            var log = await GetById((Guid)request.MessageId);
+            log.ThirdPartyReferenceCode = sendResponse.Sid;
+            log = await SaveLog(log);
         }
 
         public async Task<Entity.MessageLog> GetById(Guid id)

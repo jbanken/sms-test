@@ -8,6 +8,7 @@ using System.Web.Http;
 using Service.Interfaces;
 namespace API.Controllers
 {
+    [AllowAnonymous]
     [RoutePrefix("twilio")]
     public class TwilioController : ApiController
     {
