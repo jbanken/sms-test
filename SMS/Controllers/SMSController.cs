@@ -1,6 +1,8 @@
-﻿using Service.Interfaces;
+﻿using Entity;
+using Service.Interfaces;
 using Service.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -38,6 +40,21 @@ namespace API.Controllers
             {
                 var result = await _SMSService.GetById(id);
                 return Ok<Entity.MessageLog>(result);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("{id:guid}/statuses")]
+        public async Task<IHttpActionResult> Statuses([FromUri] Guid id)
+        {
+            try
+            {
+                var results = await _SMSService.ListMessageStatuses(id);
+                return Ok<List<MessageLogStatus>>(results);
             }
             catch (Exception ex)
             {

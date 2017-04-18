@@ -4,6 +4,8 @@ using Entity;
 using DataProvider.Interfaces;
 using Service.Interfaces;
 using SMSProvider.Interfaces;
+using System.Collections.Generic;
+
 namespace Service
 {
     public class SMSService : Interfaces.ISMSService
@@ -65,6 +67,11 @@ namespace Service
         public async Task<Entity.MessageLog> GetById(Guid id)
         {
             return await _SMSDataProvider.GetById(id);
+        }
+
+        public async Task<List<Entity.MessageLogStatus>> ListMessageStatuses(Guid id)
+        {
+            return await _SMSDataProvider.ListMessageStatuses(id);
         }
     }
 }

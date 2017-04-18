@@ -3,7 +3,8 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System;
 using Entity;
-
+using System.Collections.Generic;
+using System.Linq;
 namespace DataProvider
 {
     public class SMSDataProvider : Interfaces.ISMSDataProvider
@@ -21,6 +22,22 @@ namespace DataProvider
             using (var db = new Data.SMSDataModel())
             {
                 return await db.MessageLogs.FirstOrDefaultAsync(m => m.Id == id);
+            }
+        }
+
+        public async Task<List<MessageLogStatus>> ListMessageStatuses(Guid id)
+        {
+            using (var db = new Data.SMSDataModel())
+            {
+                var results = from s in db.TwilioStatusCallbacks
+                              join m in db.MessageLogs on s.MessageSid equals m.ThirdPartyReferenceCode
+                              where m.Id == id
+                              select new MessageLogStatus
+                              {
+                                  Name=s.MessageStatus
+                              };
+
+                return await results.ToListAsync();
             }
         }
 
