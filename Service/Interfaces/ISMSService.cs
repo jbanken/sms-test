@@ -13,5 +13,6 @@ namespace Service.Interfaces
         Task<Entity.ThirdPartyService> FindThirdPartyService(string code);
         Task<Entity.MessageLog> GetById(Guid id);
         Task<List<Entity.MessageLogStatus>> ListMessageStatuses(Guid id);
+        Task<List<Entity.MessageLogReply>> ListIncomingMessages();
     }
 }

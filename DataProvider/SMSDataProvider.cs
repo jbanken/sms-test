@@ -25,6 +25,20 @@ namespace DataProvider
             }
         }
 
+        public async Task<List<MessageLogReply>> ListIncomingMessages()
+        {
+            using (var db = new Data.SMSDataModel())
+            {
+                var results = from s in db.TwilioIncomingMessageCallbacks
+                              select new MessageLogReply
+                              {
+                                  Message = s.Body
+                              };
+
+                return await results.ToListAsync();
+            }
+        }
+
         public async Task<List<MessageLogStatus>> ListMessageStatuses(Guid id)
         {
             using (var db = new Data.SMSDataModel())

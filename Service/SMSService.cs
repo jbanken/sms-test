@@ -73,5 +73,10 @@ namespace Service
         {
             return await _SMSDataProvider.ListMessageStatuses(id);
         }
+
+        public async Task<List<Entity.MessageLogReply>> ListIncomingMessages()
+        {
+            return await _SMSDataProvider.ListIncomingMessages();
+        }
     }
 }

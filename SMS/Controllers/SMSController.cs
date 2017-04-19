@@ -23,9 +23,11 @@ namespace API.Controllers
         [Route("send")]
         public async Task<IHttpActionResult> Send([FromBody]SendRequest request)
         {
-            try { 
-            var result = await _SMSService.Send(request);
-            return Created<Entity.MessageLog>(@"/{result.Id}",result);
+            try {
+                //TODO remove, used for testing
+                request.From = string.IsNullOrEmpty(request.From) ? System.Configuration.ConfigurationManager.AppSettings["TwilioTestFrom"]: request.From;
+                var result = await _SMSService.Send(request);
+                return Created<Entity.MessageLog>(@"/{result.Id}",result);
             }catch(Exception ex)
             {
                 return InternalServerError(ex);
@@ -55,6 +57,21 @@ namespace API.Controllers
             {
                 var results = await _SMSService.ListMessageStatuses(id);
                 return Ok<List<MessageLogStatus>>(results);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("received-messages")]
+        public async Task<IHttpActionResult> ReceivedMesssages()
+        {
+            try
+            {
+                var results = await _SMSService.ListIncomingMessages();
+                return Ok<List<MessageLogReply>>(results);
             }
             catch (Exception ex)
             {
