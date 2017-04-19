@@ -20,7 +20,7 @@ namespace API.App_Start
             Service.Config.InjectionConfig.ConfigureInjections(container);
             
             container.Register<Handlers.LoggingHandler>(Lifestyle.Singleton);
-            container.Register<API.Handlers.APIKeyHandler>(SimpleInjector.Lifestyle.Singleton);
+            //container.Register<API.Handlers.APIKeyHandler>(SimpleInjector.Lifestyle.Singleton);
             container.Register<API.Handlers.AuthHandler>(SimpleInjector.Lifestyle.Singleton);
 
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
@@ -29,7 +29,7 @@ namespace API.App_Start
             container.Verify();
 
             GlobalConfiguration.Configuration.MessageHandlers.Add(new DelegatingHandlerProxy<API.Handlers.AuthHandler>(container));
-            GlobalConfiguration.Configuration.MessageHandlers.Add(new DelegatingHandlerProxy<API.Handlers.APIKeyHandler>(container));
+            //GlobalConfiguration.Configuration.MessageHandlers.Add(new DelegatingHandlerProxy<API.Handlers.APIKeyHandler>(container));
             GlobalConfiguration.Configuration.MessageHandlers.Add(new DelegatingHandlerProxy<Handlers.LoggingHandler>(container));
             
             GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
