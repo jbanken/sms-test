@@ -46,5 +46,6 @@ namespace Entity
         public string ToState { get;set;}
         [StringLength(50)]
         public string ToZip { get;set;}
+        public DateTime CreateDate { get; set; }
     }
 }

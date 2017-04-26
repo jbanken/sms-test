@@ -21,7 +21,7 @@ namespace SMSProvider
 
             message = await MessageResource.CreateAsync(
                 to: new PhoneNumber(request.To),
-                from: new PhoneNumber(request.From),//TODO using test FROM for now
+                from: new PhoneNumber(request.From),
                 body: request.Message,
                 statusCallback: new Uri(request.StatusCallbackURL));
 

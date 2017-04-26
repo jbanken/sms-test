@@ -23,60 +23,34 @@ namespace API.Controllers
         [Route("send")]
         public async Task<IHttpActionResult> Send([FromBody]SendRequest request)
         {
-            try {
-                //TODO remove, used for testing
-                request.From = string.IsNullOrEmpty(request.From) ? System.Configuration.ConfigurationManager.AppSettings["TwilioTestFrom"]: request.From;
-                var result = await _SMSService.Send(request);
-                return Created<Entity.MessageLog>(@"/{result.Id}",result);
-            }catch(Exception ex)
-            {
-                return InternalServerError(ex);
-            }
+            //TODO remove, used for testing
+            request.From = string.IsNullOrEmpty(request.From) ? System.Configuration.ConfigurationManager.AppSettings["TwilioTestFrom"]: request.From;
+            var result = await _SMSService.Send(request);
+            return Created<Entity.MessageLog>(@"/{result.Id}",result);
         }
 
         [HttpGet]
         [Route("{id:guid}")]
         public async Task<IHttpActionResult> Get([FromUri] Guid id)
         {
-            try
-            {
-                var result = await _SMSService.GetById(id);
-                return Ok<Entity.MessageLog>(result);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
+            var result = await _SMSService.GetById(id);
+            return Ok<Entity.MessageLog>(result);
         }
 
         [HttpGet]
         [Route("{id:guid}/statuses")]
         public async Task<IHttpActionResult> Statuses([FromUri] Guid id)
         {
-            try
-            {
-                var results = await _SMSService.ListMessageStatuses(id);
-                return Ok<List<MessageLogStatus>>(results);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
+            var results = await _SMSService.ListMessageStatuses(id);
+            return Ok<List<MessageLogStatus>>(results);
         }
 
         [HttpGet]
         [Route("received-messages")]
         public async Task<IHttpActionResult> ReceivedMesssages()
         {
-            try
-            {
-                var results = await _SMSService.ListIncomingMessages();
-                return Ok<List<MessageLogReply>>(results);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
+            var results = await _SMSService.ListIncomingMessages();
+            return Ok<List<MessageLogReply>>(results);
         }
     }
 }

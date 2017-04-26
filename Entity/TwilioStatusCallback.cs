@@ -28,5 +28,6 @@ namespace Entity
         public string From { get; set; }
         [StringLength(20)]
         public string APIVersion { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

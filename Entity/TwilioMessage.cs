@@ -44,5 +44,6 @@ namespace Entity
         public string To { get; set; }
         [StringLength(1000)]
         public string Uri { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

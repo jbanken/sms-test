@@ -27,12 +27,7 @@ namespace API.Controllers
         {
             if (IsTwilioCallBack())
             {
-                try {
-                    await TwilioService.SaveStatusCallback(request);
-                }catch(Exception ex)
-                {
-                    return InternalServerError(ex);
-                }
+                await TwilioService.SaveStatusCallback(request);
                 return Ok("Completed");
             }
 
@@ -48,14 +43,7 @@ namespace API.Controllers
         {
             if (IsTwilioCallBack())
             {
-                try
-                {
-                    await TwilioService.SaveIncomingMessageCallback(request);
-                }
-                catch (Exception ex)
-                {
-                    return InternalServerError(ex);
-                }
+                await TwilioService.SaveIncomingMessageCallback(request);
                 return Ok("Completed");
             }
 

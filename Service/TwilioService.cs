@@ -95,16 +95,19 @@ namespace Service
 
         public async Task<TwilioIncomingMessageCallback> SaveIncomingMessageCallback(TwilioIncomingMessageCallback record)
         {
+            record.CreateDate = DateTime.UtcNow;
             return await TwilioDataProvider.SaveIncomingMessageCallback(record);
         }
 
         public async Task<TwilioMessage> SaveMessage(TwilioMessage message)
         {
+            message.CreateDate = DateTime.UtcNow;
             return await TwilioDataProvider.SaveMessage(message);
         }
 
         public async Task<TwilioStatusCallback> SaveStatusCallback(TwilioStatusCallback record)
         {
+            record.CreateDate = DateTime.UtcNow;
             return await TwilioDataProvider.SaveStatusCallback(record);
         }
     }

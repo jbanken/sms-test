@@ -19,6 +19,10 @@ namespace Entity
         [StringLength(1000)]
         public string From { get; set; }
 
+        [Required]
+        [StringLength(2000)]
+        public string Body { get; set; }
+
         public Guid ThirdPartyServiceID { get; set; }
 
         [StringLength(200)]
